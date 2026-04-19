@@ -108,7 +108,7 @@ h2 {
         <h2>حكايتنا 💕</h2>
 
         <p class="small">أول يوم: <span class="highlight">23 / 1 / 2026</span></p>
-        <p class="small">خطوبتنا: <span class="highlight">30 / 1 / 2026</span></p>
+        <p class="small"> خطوبتنا: <span class="highlight">30 / 1 / 2026</span></p>
 
         <h3 id="days" class="highlight"></h3>
         <h3 id="countdown" class="highlight"></h3>
