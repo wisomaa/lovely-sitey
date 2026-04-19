@@ -1,11 +1,206 @@
-{
-	"folders": [
-		{
-			"path": "../.."
-		},
-		{
-			"path": "."
-		}
-	],
-	"settings": {}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>Private Space 💖</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #f7f7f7;
+    overflow: hidden;
 }
+
+/* شاشة الدخول */
+.screen {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* كروت */
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    text-align: center;
+    width: 320px;
+}
+
+/* input */
+input {
+    width: 85%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+/* button */
+button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 10px;
+    background: #ff6b81;
+    color: white;
+    cursor: pointer;
+}
+
+/* الصفحة الثانية */
+#home {
+    display: none;
+    background: linear-gradient(to bottom, #fff0f5, #ffffff);
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* نصوص */
+h2 {
+    color: #ff4d6d;
+}
+
+.small {
+    color: #777;
+}
+
+.highlight {
+    color: #ff6b81;
+    font-weight: bold;
+}
+
+/* قلوب هادية */
+.heart {
+    position: absolute;
+    color: #ffb6c1;
+    animation: float 6s linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); }
+    100% { transform: translateY(-10vh); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔐 Login -->
+<div class="screen" id="login">
+    <div class="card">
+        <h3>Private Access 💖</h3>
+        <input id="user" placeholder="Username">
+        <input type="password" id="pass" placeholder="Password">
+        <button onclick="login()">Enter</button>
+        <p id="err" style="color:red;"></p>
+    </div>
+</div>
+
+<!-- 💖 Home -->
+<div class="screen" id="home">
+    <div>
+        <h2>حكايتنا 💕</h2>
+
+        <p class="small">أول يوم: <span class="highlight">23 / 1 / 2026</span></p>
+        <p class="small">خطوبتنا: <span class="highlight">30 / 1 / 2026</span></p>
+
+        <h3 id="days" class="highlight"></h3>
+        <h3 id="countdown" class="highlight"></h3>
+
+        <p id="msg"></p>
+    </div>
+</div>
+
+<script>
+
+/* دخول */
+function login() {
+    let u = document.getElementById("user").value;
+    let p = document.getElementById("pass").value;
+
+    if (u === "عيوني" && p === "0110") {
+
+        document.getElementById("login").style.display = "none";
+        document.getElementById("home").style.display = "flex";
+
+        calcDays();
+        countdown();
+        typeMsg();
+        hearts();
+
+    } else {
+        document.getElementById("err").innerHTML = "Try again 💔";
+    }
+}
+
+/* الأيام */
+function calcDays() {
+    let start = new Date("2026-01-23");
+    let now = new Date();
+
+    let days = Math.floor((now - start) / (1000*60*60*24));
+
+    document.getElementById("days").innerHTML =
+        "عدّى علينا " + days + " يوم مع بعض 💕";
+}
+
+/* countdown الفرح */
+function countdown() {
+    let wedding = new Date("2026-11-12");
+
+    function update() {
+        let now = new Date();
+        let diff = wedding - now;
+
+        let days = Math.floor(diff / (1000*60*60*24));
+
+        document.getElementById("countdown").innerHTML =
+            "فاضل على فرحنا: " + days + " يوم 💍";
+    }
+
+    update();
+    setInterval(update, 60000);
+}
+
+/* رسالة */
+let text = "حابه اقولك اني بحبك وجدا جدا جدا جدا💗🌚                     ولو فضلت اتكلم م هوفي حقي الصراحه ولكن انا للحقيقه يعني واقعه ف غرامك يحمودي بتفاصيلك ب حركاتك ب كلامك شكلي متيمه بيك وانا م حاسه 🥰💑                       طبعا لا اطيق الانتظار ليوم هنبقا ف انا وحبيب القلب م بعض 💕           وصدقني انا اسفه لو بضايقك وكدا بس انا بحبك  وبحب انكشك جدا ف الاخر يعني 😉                                     انا بحبك اوي اوي اوي  💖";
+let i = 0;
+
+function typeMsg() {
+    let el = document.getElementById("msg");
+
+    function typing() {
+        if (i < text.length) {
+            el.innerHTML += text[i];
+            i++;
+            setTimeout(typing, 70);
+        }
+    }
+
+    typing();
+}
+
+/* قلوب */
+function hearts() {
+    setInterval(() => {
+        let h = document.createElement("div");
+        h.classList.add("heart");
+        h.innerHTML = "💗";
+        h.style.left = Math.random() * 100 + "vw";
+        h.style.fontSize = (10 + Math.random()*15) + "px";
+        document.body.appendChild(h);
+
+        setTimeout(() => h.remove(), 6000);
+    }, 400);
+}
+
+</script>
+
+</body>
+</html>
